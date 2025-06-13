@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>WEST BENGAL's Musical Heritage</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Poppins:wght@400;600&display=swap');
+    :root {
+            --color1: #006266; /* Kerala Green */
+            --color2: #FFC312; /* Kerala Gold */
+            --color3: #1289A7; /* Kerala Blue */
+            --color4: #EE5A24; /* Kerala Orange */
+        }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #f0f8ff 0%, #e6f0fa 100%);
+      color: #333;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    .music-note {
+      position: fixed;
+      font-size: 24px;
+      opacity: 0;
+      z-index: -1;
+      animation: floatNote 8s linear infinite;
+      color: #000000;
+    }
+
+    @keyframes floatNote {
+      0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+      20%, 80% { opacity: 0.7; }
+      100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+    }
+
+    .header {
+      background: linear-gradient(135deg, var(--color1), var(--color2));
+      color: white;
+      text-align: center;
+      padding: 50px 20px;
+      animation: pulse 15s infinite alternate;
+    }
+
+    @keyframes pulse {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 100% 50%; }
+    }
+
+    h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 3rem;
+      margin: 0;
+    }
+
+    .subtitle {
+      font-size: 1.2rem;
+      opacity: 0.9;
+      margin-top: 10px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    .instrument-card {
+      background: white;
+      border-radius: 15px;
+      margin-bottom: 40px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+      transition: all 0.4s ease;
+    }
+
+    .instrument-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+    }
+
+    .instrument-card::before {
+      content: "";
+      height: 5px;
+      width: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: linear-gradient(90deg, var(--card-color1), var(--card-color2));
+    }
+
+    .instrument-header {
+      padding: 25px;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .instrument-icon {
+      font-size: 2.5rem;
+      margin-right: 20px;
+      color: var(--card-color1);
+    }
+
+    .instrument-name {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.8rem;
+      flex-grow: 1;
+      color: var(--card-color1);
+    }
+
+    .instrument-toggle {
+      font-size: 1.8rem;
+      color: var(--card-color1);
+      transition: transform 0.3s ease;
+    }
+
+    .instrument-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.6s ease, padding 0.4s ease;
+    }
+
+    .instrument-card.active .instrument-content {
+      max-height: 2000px;
+      padding: 0 25px 25px;
+    }
+
+    .instrument-card.active .instrument-toggle {
+      transform: rotate(45deg);
+    }
+
+    .instrument-image-container {
+      margin-bottom: 20px;
+      overflow: hidden;
+      border-radius: 10px;
+    }
+
+    .instrument-image {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+    }
+
+    .instrument-desc {
+      line-height: 1.8;
+      color: #555;
+      font-size: 1.1rem;
+      padding: 0 10px;
+    }
+
+    .equalizer {
+      display: flex;
+      align-items: flex-end;
+      height: 30px;
+      margin-left: 15px;
+    }
+
+    .equalizer-bar {
+      width: 4px;
+      margin-right: 3px;
+      background: currentColor;
+      animation: equalize 1.5s infinite ease-in-out;
+    }
+
+    @keyframes equalize {
+      0%, 100% { transform: scaleY(0.3); }
+      50% { transform: scaleY(1); }
+    }
+
+    #dotara-card {
+      --card-color1: var(--color1);
+      --card-color2: var(--color2);
+    }
+
+    #khanjani-card {
+      --card-color1: var(--color3);
+      --card-color2: var(--color4);
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      background: linear-gradient(135deg, var(--color1), var(--color3));
+      color: white;
+    }
+
+    .footer-text {
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="music-note" style="left: 10%; animation-delay: 0s;">♪</div>
+  <div class="music-note" style="left: 25%; animation-delay: 2s;">♫</div>
+  <div class="music-note" style="left: 70%; animation-delay: 4s;">♬</div>
+  <div class="music-note" style="left: 85%; animation-delay: 6s;">♩</div>
+
+  <header class="header">
+    <h1>WEST BENGAL's</h1>
+    <p class="subtitle">Traditional Musical Instruments</p>
+    <div class="equalizer" style="justify-content: center; margin-top: 20px;">
+      <div class="equalizer-bar" style="animation-delay: -0.9s;"></div>
+      <div class="equalizer-bar" style="animation-delay: -0.6s;"></div>
+      <div class="equalizer-bar" style="animation-delay: -0.3s;"></div>
+      <div class="equalizer-bar" style="animation-delay: -0.1s;"></div>
+      <div class="equalizer-bar" style="animation-delay: -0.7s;"></div>
+    </div>
+  </header>
+
+  <div class="container">
+
+    <!-- Dotara -->
+    <div class="instrument-card" id="dotara-card">
+      <div class="instrument-header" onclick="toggleInstrument('dotara-card')">
+        <div class="instrument-icon">🎸</div>
+        <div class="instrument-name">Dotara</div>
+        <div class="instrument-toggle">+</div>
+      </div>
+      <div class="instrument-content">
+        <div class="instrument-image-container">
+          <img src="c:\Users\YASHASWINI\OneDrive\Desktop\project\images\west bengal.jpg" alt="Dotara" class="instrument-image"style="max-width: 300px; height: auto;"> >
+        </div>
+        <div class="instrument-desc">
+          <p>The Dotara is a traditional plucked string instrument from West Bengal, widely used in Baul, Bhawaiya, and Bhatiali folk music. Despite its name meaning "two strings", modern Dotaras often have four to six strings, allowing for a richer tonal range.</p>
+          <p><strong>🔑 Key Features:</strong></p>
+          <ul>
+            <li>🎵 <strong>Instrument Type:</strong> String (Plucked)</li>
+            <li>🌳 <strong>Material:</strong> Made from wood, brass, silk, and metal</li>
+            <li>🎼 <strong>Played With:</strong> Fingers or a plectrum (Kati)</li>
+            <li>📏 <strong>Shape:</strong> Long-necked with a rounded resonator</li>
+            <li>🔊 <strong>Sound:</strong> Deep, rhythmic, and expressive</li>
+            <li>🕉️ <strong>Cultural Use:</strong> Baul music, folk performances, storytelling</li>
+            <li>🎭 <strong>Performance Style:</strong> Played solo or in ensemble, often with vocals</li>
+          </ul>
+          <p><strong>🌟 Cultural Importance:</strong> The Dotara is deeply tied to Bengali folk traditions and is symbolic of spiritual and social connection. Played by Bauls and Fakirs, it reflects centuries-old storytelling and musical expression.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Khanjani -->
+    <div class="instrument-card" id="khanjani-card">
+      <div class="instrument-header" onclick="toggleInstrument('khanjani-card')">
+        <div class="instrument-icon">🥁</div>
+        <div class="instrument-name">Khanjani</div>
+        <div class="instrument-toggle">+</div>
+      </div>
+      <div class="instrument-content">
+        <div class="instrument-image-container">
+          <img src="c:\Users\YASHASWINI\OneDrive\Desktop\project\images\west bengal1.jpg" alt="Khanjani" class="instrument-image"style="max-width: 300px; height: auto;"> >
+        </div>
+        <div class="instrument-desc">
+          <p>The Khanjani is a small traditional frame drum popular in devotional and folk music across West Bengal. Similar to a tambourine, it is often used in kirtans and bhajans.</p>
+          <p><strong>🔑 Key Features:</strong></p>
+          <ul>
+            <li>🎵 <strong>Instrument Type:</strong> Percussion (Frame Drum)</li>
+            <li>🌳 <strong>Material:</strong> Wooden frame with animal skin membrane and jingles</li>
+            <li>🎼 <strong>Played With:</strong> Hand (palm and fingers)</li>
+            <li>📏 <strong>Shape:</strong> Circular frame drum</li>
+            <li>🔊 <strong>Sound:</strong> Crisp, jingling percussion</li>
+            <li>🕉️ <strong>Cultural Use:</strong> Devotional songs, bhajans, folk ensembles</li>
+            <li>🎭 <strong>Performance Style:</strong> Played solo or with other folk instruments, often in religious settings</li>
+          </ul>
+          <p><strong>🌟 Cultural Importance:</strong> The Khanjani is a staple in spiritual gatherings in West Bengal, used to maintain rhythm and elevate devotional singing.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <p class="footer-text"> NADA ANVESHA |West Bengal's Cultural Heritage</p>
+    <div class="equalizer" style="justify-content: center; margin-top: 15px;">
+      <div class="equalizer-bar" style="animation-delay: -0.8s;"></div>
+      <div class="equalizer-bar" style="animation-delay: -0.5s;"></div>
+      <div class="equalizer-bar" style="animation-delay: -0.2s;"></div>
+      <div class="equalizer-bar" style="animation-delay: -0.7s;"></div>
+      <div class="equalizer-bar" style="animation-delay: -0.4s;"></div>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const notes = ['♪', '♫', '♩', '♬', '♭'];
+      for (let i = 0; i < 8; i++) {
+        const note = document.createElement('div');
+        note.className = 'music-note';
+        note.textContent = notes[Math.floor(Math.random() * notes.length)];
+        note.style.left = Math.random() * 100 + '%';
+        note.style.animationDelay = Math.random() * 8 + 's';
+        note.style.animationDuration = 5 + Math.random() * 10 + 's';
+        document.body.appendChild(note);
+      }
+    });
+
+    function toggleInstrument(cardId) {
+      const card = document.getElementById(cardId);
+      card.classList.toggle('active');
+      if (card.classList.contains('active')) {
+        document.querySelectorAll('.instrument-card').forEach(item => {
+          if (item.id !== cardId && item.classList.contains('active')) {
+            item.classList.remove('active');
+          }
+        });
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MANIPUR's Musical Heritage</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Poppins:wght@400;600&display=swap');
+
+    :root {
+      --color1: #006266;
+      --color2: #FFC312;
+      --color3: #1289A7;
+      --color4: #EE5A24;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #f0f8ff 0%, #e6f0fa 100%);
+      color: #333;
+      overflow-x: hidden;
+    }
+
+    .music-note {
+      position: fixed;
+      font-size: 24px;
+      opacity: 0;
+      z-index: -1;
+      animation: floatNote 8s linear infinite;
+      color: #000;
+    }
+
+    @keyframes floatNote {
+      0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+      20%, 80% { opacity: 0.7; }
+      100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+    }
+
+    .header {
+      background: linear-gradient(135deg, var(--color1), var(--color2));
+      color: white;
+      text-align: center;
+      padding: 50px 20px;
+      animation: pulse 15s infinite alternate;
+    }
+
+    @keyframes pulse {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 100% 50%; }
+    }
+
+    h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 3rem;
+      margin: 0;
+    }
+
+    .subtitle {
+      font-size: 1.2rem;
+      opacity: 0.9;
+      margin-top: 10px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    .instrument-card {
+      background: white;
+      border-radius: 15px;
+      margin-bottom: 40px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+      transition: 0.4s ease;
+    }
+
+    .instrument-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+    }
+
+    .instrument-card::before {
+      content: "";
+      display: block;
+      height: 5px;
+      background: linear-gradient(90deg, var(--card-color1), var(--card-color2));
+    }
+
+    .instrument-header {
+      padding: 25px;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .instrument-icon {
+      font-size: 2.5rem;
+      margin-right: 20px;
+      color: var(--card-color1);
+    }
+
+    .instrument-name {
+      font-size: 1.8rem;
+      flex-grow: 1;
+      color: var(--card-color1);
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .instrument-toggle {
+      font-size: 1.8rem;
+      color: var(--card-color1);
+      transition: transform 0.3s ease;
+    }
+
+    .instrument-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.6s ease, padding 0.4s ease;
+    }
+
+    .instrument-card.active .instrument-content {
+      max-height: 2000px;
+      padding: 0 25px 25px;
+    }
+
+    .instrument-card.active .instrument-toggle {
+      transform: rotate(45deg);
+    }
+
+    .instrument-image-container {
+      margin-bottom: 20px;
+    }
+
+    .instrument-image {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    .instrument-desc {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: #555;
+    }
+
+    #pena-card {
+      --card-color1: var(--color3);
+      --card-color2: var(--color2);
+    }
+
+    #khol-card {
+      --card-color1: #8e44ad;
+      --card-color2: #f39c12;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      background: linear-gradient(135deg, var(--color1), var(--color3));
+      color: white;
+    }
+
+    .footer-text {
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Floating Notes -->
+<div class="music-note" style="left: 10%; animation-delay: 0s;">♩</div>
+<div class="music-note" style="left: 25%; animation-delay: 2s;">♪</div>
+<div class="music-note" style="left: 50%; animation-delay: 4s;">♫</div>
+<div class="music-note" style="left: 75%; animation-delay: 6s;">♬</div>
+
+<header class="header">
+  <h1>MANIPUR's</h1>
+  <p class="subtitle">Traditional Musical Instruments</p>
+</header>
+
+<div class="container">
+
+  <!-- Pena -->
+  <div class="instrument-card" id="pena-card">
+    <div class="instrument-header" onclick="toggleInstrument('pena-card')">
+      <div class="instrument-icon">🎻</div>
+      <div class="instrument-name">Pena</div>
+      <div class="instrument-toggle">+</div>
+    </div>
+    <div class="instrument-content">
+      <div class="instrument-image-container">
+        <img src="c:\Users\YASHASWINI\OneDrive\Desktop\project\images\manipir.jpeg" alt="Pena" class="instrument-image"style="max-width: 300px; height: auto;"> >
+      </div>
+      <div class="instrument-desc">
+        <p>The <strong>Pena</strong> is a traditional bowed string instrument from Manipur, considered the soul of Manipuri folk music. It is deeply tied to Meitei culture, often played during Lai Haraoba festivals and other ceremonial events.</p>
+        <p><strong>🔑 Key Features:</strong></p>
+        <ul>
+          <li>🎵 <strong>Instrument Type:</strong> String (Bowed)</li>
+          <li>🌳 <strong>Material:</strong> Bamboo, coconut shell, and horsehair</li>
+          <li>🎼 <strong>Played With:</strong> A bow made of wood and metal</li>
+          <li>📏 <strong>Shape:</strong> Long bamboo neck with a coconut shell resonator</li>
+          <li>🔊 <strong>Sound:</strong> Deep, expressive, and hypnotic</li>
+          <li>🕉️ <strong>Cultural Use:</strong> Folk music, storytelling, religious ceremonies</li>
+          <li>🎭 <strong>Performance Style:</strong> Solo or ensemble, often with traditional dance</li>
+        </ul>
+        <p><strong>🌟 Cultural Importance:</strong> The Pena is one of the oldest traditional Meitei instruments, once played at royal gatherings. It is revered by many as divine, crafted with great care and passed on through generations.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Khol -->
+  <div class="instrument-card" id="khol-card">
+    <div class="instrument-header" onclick="toggleInstrument('khol-card')">
+      <div class="instrument-icon">🥁</div>
+      <div class="instrument-name">Khol</div>
+      <div class="instrument-toggle">+</div>
+    </div>
+    <div class="instrument-content">
+      <div class="instrument-image-container">
+        <img src="c:\Users\YASHASWINI\OneDrive\Desktop\project\images\manipur1.jpg" alt="Khol" class="instrument-image"style="max-width: 300px; height: auto;"> >
+      </div>
+      <div class="instrument-desc">
+        <p>The <strong>Khol</strong> is a traditional double-sided terracotta drum used widely in devotional music, folk performances, and classical traditions in Manipur.</p>
+        <p><strong>🔑 Key Features:</strong></p>
+        <ul>
+          <li>🎵 <strong>Instrument Type:</strong> Percussion (Drum)</li>
+          <li>🌳 <strong>Material:</strong> Clay body with leather drumheads</li>
+          <li>🎼 <strong>Played With:</strong> Palms and fingers</li>
+          <li>📏 <strong>Shape:</strong> Elongated, barrel-shaped with two heads</li>
+          <li>🔊 <strong>Sound:</strong> Rhythmic, resonant, and layered</li>
+          <li>🕉️ <strong>Cultural Use:</strong> Religious festivals, Vaishnavite kirtans</li>
+          <li>🎭 <strong>Performance Style:</strong> Played in group devotional or folk musical settings</li>
+        </ul>
+        <p><strong>🌟 Cultural Importance:</strong> The Khol is an essential element in Manipur’s Vaishnavite musical traditions and often accompanies devotional singing and dance performances.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p class="footer-text"> NADA ANVESHA |Manipur'S Cultural Heritage</p>
+</footer>
+
+<script>
+  function toggleInstrument(cardId) {
+    const card = document.getElementById(cardId);
+    card.classList.toggle('active');
+    if (card.classList.contains('active')) {
+      document.querySelectorAll('.instrument-card').forEach(item => {
+        if (item.id !== cardId && item.classList.contains('active')) {
+          item.classList.remove('active');
+        }
+      });
+    }
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PUNJAB's Musical Heritage</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Poppins:wght@400;600&display=swap');
+        
+        :root {
+            --color1: #006266; /* Same as previous */
+            --color2: #FFC312; /* Same as previous */
+            --color3: #1289A7; /* Same as previous */
+            --color4: #EE5A24; /* Same as previous */
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #f0f8ff 0%, #e6f0fa 100%);
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .music-note {
+            position: fixed;
+            font-size: 24px;
+            opacity: 0;
+            z-index: -1;
+            animation: floatNote 8s linear infinite;
+            color: #000000;
+        }
+        
+        @keyframes floatNote {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            20% {
+                opacity: 0.7;
+            }
+            80% {
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        .header {
+            background: linear-gradient(135deg, var(--color1), var(--color2));
+            color: white;
+            text-align: center;
+            padding: 50px 20px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            animation: pulse 15s infinite alternate;
+        }
+        
+        @keyframes pulse {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+        
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3rem;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            position: relative;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-top: 10px;
+            position: relative;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        
+        .instrument-card {
+            background: white;
+            border-radius: 15px;
+            margin-bottom: 40px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+        }
+        
+        .instrument-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+        }
+        
+        .instrument-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--card-color1), var(--card-color2));
+        }
+        
+        .instrument-header {
+            padding: 25px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .instrument-icon {
+            font-size: 2.5rem;
+            margin-right: 20px;
+            transition: transform 0.3s ease;
+            color: var(--card-color1);
+        }
+        
+        .instrument-name {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+            flex-grow: 1;
+            color: var(--card-color1);
+        }
+        
+        .instrument-toggle {
+            font-size: 1.8rem;
+            transition: transform 0.3s ease;
+            color: var(--card-color1);
+        }
+        
+        .instrument-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.6s ease, padding 0.4s ease;
+        }
+        
+        .instrument-card.active .instrument-content {
+            max-height: 2000px;
+            padding: 0 25px 25px;
+        }
+        
+        .instrument-card.active .instrument-toggle {
+            transform: rotate(45deg);
+        }
+        
+        .instrument-image-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+        
+        .instrument-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .instrument-card:hover .instrument-image {
+            transform: scale(1.03);
+        }
+        
+        .instrument-desc {
+            line-height: 1.8;
+            color: #555;
+            font-size: 1.1rem;
+            padding: 0 10px;
+        }
+        
+        .equalizer {
+            display: flex;
+            align-items: flex-end;
+            height: 30px;
+            margin-left: 15px;
+        }
+        
+        .equalizer-bar {
+            width: 4px;
+            margin-right: 3px;
+            background: currentColor;
+            animation: equalize 1.5s infinite ease-in-out;
+        }
+        
+        @keyframes equalize {
+            0%, 100% { transform: scaleY(0.3); }
+            50% { transform: scaleY(1); }
+        }
+        
+        #tumbi-card {
+            --card-color1: var(--color1);
+            --card-color2: var(--color2);
+        }
+        
+        #bugchu-card {
+            --card-color1: var(--color3);
+            --card-color2: var(--color4);
+        }
+        
+        #algoze-card {
+            --card-color1: #833471;
+            --card-color2: #5758BB;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px;
+            background: linear-gradient(135deg, var(--color1), var(--color3));
+            color: white;
+            margin-top: 50px;
+        }
+        
+        .footer-text {
+            margin: 0;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .instrument-name {
+                font-size: 1.5rem;
+            }
+            
+            .instrument-image {
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="music-note" style="left: 5%; animation-delay: 0s;">♩</div>
+    <div class="music-note" style="left: 15%; animation-delay: 2s;">♪</div>
+    <div class="music-note" style="left: 85%; animation-delay: 4s;">♫</div>
+    <div class="music-note" style="left: 95%; animation-delay: 6s;">♬</div>
+    <div class="music-note" style="left: 50%; animation-delay: 1s;">♭</div>
+    <div class="music-note" style="left: 30%; animation-delay: 3s;">♪</div>
+    <div class="music-note" style="left: 70%; animation-delay: 5s;">♩</div>
+    
+    <header class="header">
+        <h1>PUNJAB's</h1>
+        <p class="subtitle">Traditional Musical Instruments</p>
+        <div class="equalizer" style="justify-content: center; margin-top: 20px;">
+            <div class="equalizer-bar" style="animation-delay: -0.9s;"></div>
+            <div class="equalizer-bar" style="animation-delay: -0.6s;"></div>
+            <div class="equalizer-bar" style="animation-delay: -0.3s;"></div>
+            <div class="equalizer-bar" style="animation-delay: -0.1s;"></div>
+            <div class="equalizer-bar" style="animation-delay: -0.7s;"></div>
+        </div>
+    </header>
+    
+    <div class="container">
+        <!-- Tumbi -->
+        <div class="instrument-card" id="tumbi-card">
+            <div class="instrument-header" onclick="toggleInstrument('tumbi-card')">
+                <div class="instrument-icon">🎸</div>
+                <div class="instrument-name">Tumbi</div>
+                <div class="instrument-toggle">+</div>
+            </div>
+            <div class="instrument-content">
+                <div class="instrument-image-container">
+                    <img src="c:\Users\YASHASWINI\OneDrive\Desktop\project\images\punjab.jpg" alt="Dolu" class="instrument-image" style="max-width: 300px; height: auto;">
+                    <img src="c:\Users\YASHASWINI\OneDrive\Desktop\project\images\punjab.1.gif" alt="Dolu" class="instrument-image" style="max-width: 300px; height: auto;">
+                
+                </div>
+                <div class="instrument-desc">
+                    <p>The <strong>Tumbi</strong> is a traditional single-stringed instrument from Punjab, widely used in folk and Bhangra music. Known for its high-energy rhythmic sound, the Tumbi is played by plucking its single steel string, creating sharp and distinctive tones.</p>
+
+                    <p><strong>🔑 Key Features:</strong></p>
+                    <p>🎵 <strong>Instrument Type:</strong> String (Plucked)</p>
+                    <p>🌳 <strong>Material:</strong> Wooden resonator with a steel string</p>
+                    <p>🎼 <strong>Played With:</strong> Finger plucking</p>
+                    <p>📏 <strong>Shape:</strong> Small, round resonator with a long neck</p>
+                    <p>🔊 <strong>Sound:</strong> Sharp, rhythmic, and energetic</p>
+                    <p>💃 <strong>Cultural Use:</strong> Bhangra performances, Punjabi folk music</p>
+                    <p>🎭 <strong>Performance Style:</strong> Often played in fast-paced Punjabi songs, accompanying <strong>Dhol</strong> rhythms</p>
+
+                    <p><strong>🌟 Cultural Importance in Punjab:</strong><br>The Tumbi holds a significant place in Punjabi folk traditions. Its lively, distinctive sound has become an iconic part of Bhangra music, symbolizing the vibrancy and celebratory spirit of the region.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Bugchu -->
+        <div class="instrument-card" id="bugchu-card">
+            <div class="instrument-header" onclick="toggleInstrument('bugchu-card')">
+                <div class="instrument-icon">🎵</div>
+                <div class="instrument-name">Bugchu</div>
+                <div class="instrument-toggle">+</div>
+            </div>
+            <div class="instrument-content">
+                <div class="instrument-image-container">
+                    <img src="c:\Users\YASHASWINI\OneDrive\Desktop\project\images\punjab 2.jpg" alt="Dolu" class="instrument-image" style="max-width: 300px; height: auto;">
+                    <img src="c:\Users\YASHASWINI\OneDrive\Desktop\project\images\punjab 2.1.jpg" alt="Dolu" class="instrument-image" style="max-width: 300px; height: auto;">    
+                </div>
+                <div class="instrument-desc">
+                    <p>The <strong>Bugchu</strong> is a unique percussion instrument from Punjab, played in folk music and dance traditions like Bhangra and Malwai Giddha. It consists of a flexible wooden strip and a stretched string that produces a bouncing sound when pulled.</p>
+
+                    <p><strong>🔑 Key Features:</strong></p>
+                    <p>🎵 <strong>Instrument Type:</strong> Percussion (Plucked)</p>
+                    <p>🌳 <strong>Material:</strong> Wooden body with a string</p>
+                    <p>🎼 <strong>Played With:</strong> Pulling and releasing the string</p>
+                    <p>📏 <strong>Shape:</strong> Small, bow-like structure</p>
+                    <p>🔊 <strong>Sound:</strong> Bouncing, rhythmic, and vibrant</p>
+                    <p>💃 <strong>Cultural Use:</strong> Folk dances like Bhangra and Malwai Giddha</p>
+                    <p>🎭 <strong>Performance Style:</strong> Used to enhance rhythmic beats alongside <strong>Dhol</strong> and <strong>Tumbi</strong></p>
+
+                    <p><strong>🌟 Cultural Importance in Punjab:</strong><br>The Bugchu adds an element of rhythmic excitement to Punjabi folk performances. Its dynamic bouncing sound, paired with energetic dance movements, makes it a crucial instrument in traditional celebrations.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Algoze -->
+        <div class="instrument-card" id="algoze-card">
+            <div class="instrument-header" onclick="toggleInstrument('algoze-card')">
+                <div class="instrument-icon">🎶</div>
+                <div class="instrument-name">Algoze</div>
+                <div class="instrument-toggle">+</div>
+            </div>
+            <div class="instrument-content">
+                <div class="instrument-image-container">
+                    <img src="c:\Users\YASHASWINI\OneDrive\Desktop\project\images\punjab1.jpg" alt="Dolu" class="instrument-image" style="max-width: 300px; height: auto;">
+                    <img src="c:\Users\YASHASWINI\OneDrive\Desktop\project\images\punjab1.1.jpg" alt="Dolu" class="instrument-image" style="max-width: 300px; height: auto;">   
+                </div>
+                <div class="instrument-desc">
+                    <p>The <strong>Algoze</strong> is a traditional wind instrument from Punjab, often played in folk music and storytelling traditions. It consists of two wooden flutes played simultaneously, creating a rhythmic and melodic sound.</p>
+
+                    <p><strong>🔑 Key Features:</strong></p>
+                    <p>🎵 <strong>Instrument Type:</strong> Wind (Double-flute)</p>
+                    <p>🌳 <strong>Material:</strong> Wooden body</p>
+                    <p>🎼 <strong>Played With:</strong> Blown air through both flutes</p>
+                    <p>📏 <strong>Shape:</strong> Two parallel flutes, one for melody and one for drone</p>
+                    <p>🔊 <strong>Sound:</strong> Rhythmic, swinging, and expressive</p>
+                    <p>🕉️ <strong>Cultural Use:</strong> Folk music, storytelling, and devotional performances</p>
+                    <p>🎭 <strong>Performance Style:</strong> Requires circular breathing for continuous sound</p>
+
+                    <p><strong>🌟 Cultural Importance in Punjab:</strong><br>The Algoze is deeply embedded in Punjabi folk traditions, often accompanying Jugni, Jind Mahi, and Mirza songs. Its hypnotic, flowing melodies make it a favorite among folk musicians.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <p class="footer-text">NADA ANVESHA | Punjab'S Cultural Heritage </p>
+        <div class="equalizer" style="justify-content: center; margin-top: 15px;">
+            <div class="equalizer-bar" style="animation-delay: -0.8s;"></div>
+            <div class="equalizer-bar" style="animation-delay: -0.5s;"></div>
+            <div class="equalizer-bar" style="animation-delay: -0.2s;"></div>
+            <div class="equalizer-bar" style="animation-delay: -0.7s;"></div>
+            <div class="equalizer-bar" style="animation-delay: -0.4s;"></div>
+        </div>
+    </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const notes = ['♪', '♫', '♩', '♬', '♭'];
+            const body = document.body;
+            
+            for (let i = 0; i < 8; i++) {
+                const note = document.createElement('div');
+                note.className = 'music-note';
+                note.textContent = notes[Math.floor(Math.random() * notes.length)];
+                note.style.left = Math.random() * 100 + '%';
+                note.style.animationDelay = Math.random() * 8 + 's';
+                note.style.animationDuration = 5 + Math.random() * 10 + 's';
+                body.appendChild(note);
+            }
+        });
+        
+        function toggleInstrument(cardId) {
+            const card = document.getElementById(cardId);
+            card.classList.toggle('active');
+            
+            if (card.classList.contains('active')) {
+                document.querySelectorAll('.instrument-card').forEach(item => {
+                    if (item.id !== cardId && item.classList.contains('active')) {
+                        item.classList.remove('active');
+                    }
+                });
+            }
+        }
+    </script>
+</body>
+</html>

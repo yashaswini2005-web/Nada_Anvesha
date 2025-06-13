@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NADA ANVESHA | Welcome</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color1: #006266; /* Kerala Green */
+      --color2: #FFC312; /* Kerala Gold */
+      --color3: #1289A7; /* Kerala Blue */
+      --color4: #EE5A24; /* Kerala Orange */
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Montserrat', sans-serif;
+      height: 100vh;
+      background: linear-gradient(135deg, var(--color1), var(--color3));
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .cover-container {
+      text-align: center;
+      z-index: 10;
+      padding: 0 20px;
+      max-width: 800px;
+    }
+    
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 4rem;
+      margin-bottom: 1.5rem;
+      background: linear-gradient(to right, var(--color2), var(--color4));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    .tagline {
+      font-size: 1.5rem;
+      margin-bottom: 3rem;
+      opacity: 0.9;
+      font-weight: 300;
+    }
+    
+    .start-btn {
+      display: inline-block;
+      padding: 15px 40px;
+      background: linear-gradient(to right, var(--color2), var(--color4));
+      color: var(--color1);
+      text-decoration: none;
+      border-radius: 50px;
+      font-size: 1.2rem;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      border: none;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    .start-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 25px rgba(0,0,0,0.3);
+    }
+    
+    .start-btn:active {
+      transform: translateY(1px);
+    }
+    
+    /* Animated background elements */
+    .music-note {
+      position: absolute;
+      color: rgba(255,255,255,0.1);
+      font-size: 2rem;
+      animation: float 6s ease-in-out infinite;
+      z-index: 1;
+    }
+    
+    .note-1 { top: 10%; left: 5%; animation-delay: 0s; }
+    .note-2 { top: 30%; right: 8%; animation-delay: 1s; }
+    .note-3 { bottom: 15%; left: 7%; animation-delay: 2s; }
+    .note-4 { bottom: 25%; right: 10%; animation-delay: 3s; }
+    .note-5 { top: 20%; right: 20%; animation-delay: 0.5s; }
+    .note-6 { bottom: 30%; left: 20%; animation-delay: 1.5s; }
+    
+    @keyframes float {
+      0% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-20px) rotate(5deg); }
+      100% { transform: translateY(0) rotate(0deg); }
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 3rem;
+      }
+      
+      .tagline {
+        font-size: 1.2rem;
+      }
+      
+      .start-btn {
+        padding: 12px 30px;
+        font-size: 1rem;
+      }
+      
+      .music-note {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Animated background elements -->
+  <div class="music-note note-1">♪</div>
+  <div class="music-note note-2">♫</div>
+  <div class="music-note note-3">♬</div>
+  <div class="music-note note-4">♩</div>
+  <div class="music-note note-5">♪</div>
+  <div class="music-note note-6">♫</div>
+  
+  <div class="cover-container">
+    <h1>NADA ANVESHA</h1>
+    <p class="tagline">A Journey Through India's Musical Landscape</p>
+    <a href="mainpage.html" class="start-btn">Begin Exploration</a>
+  </div>
+
+  <script>
+    // Simple animation for notes on load
+    document.addEventListener('DOMContentLoaded', function() {
+      const notes = document.querySelectorAll('.music-note');
+      notes.forEach((note, index) => {
+        // Randomize initial positions slightly
+        note.style.transform = `translateY(${Math.random() * 20 - 10}px) rotate(${Math.random() * 10 - 5}deg)`;
+      });
+    });
+  </script>
+</body>
+</html>

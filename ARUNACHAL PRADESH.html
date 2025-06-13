@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARUNACHAL PRADESH's Musical Heritage</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Poppins:wght@400;600&display=swap');
+        
+        :root {
+            --color1: #006266; /* Kerala Green */
+            --color2: #FFC312; /* Kerala Gold */
+            --color3: #1289A7; /* Kerala Blue */
+            --color4: #EE5A24; /* Kerala Orange */
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #f0f8ff 0%, #e6f0fa 100%);
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        /* Floating Music Notes */
+        .music-note {
+            position: fixed;
+            font-size: 24px;
+            opacity: 0;
+            z-index: -1;
+            animation: floatNote 8s linear infinite;
+            color: #000000;
+        }
+        
+        @keyframes floatNote {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            20% {
+                opacity: 0.7;
+            }
+            80% {
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--color1), var(--color2));
+            color: white;
+            text-align: center;
+            padding: 50px 20px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            animation: pulse 15s infinite alternate;
+        }
+        
+        @keyframes pulse {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+        
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3rem;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            position: relative;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-top: 10px;
+            position: relative;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        
+        /* Instrument Cards */
+        .instrument-card {
+            background: white;
+            border-radius: 15px;
+            margin-bottom: 40px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+        }
+        
+        .instrument-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+        }
+        
+        .instrument-header {
+            padding: 25px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .instrument-icon {
+            font-size: 2.5rem;
+            margin-right: 20px;
+            transition: transform 0.3s ease;
+            color: var(--card-color1);
+        }
+        
+        .instrument-name {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+            flex-grow: 1;
+            color: var(--card-color1);
+        }
+        
+        .instrument-toggle {
+            font-size: 1.8rem;
+            transition: transform 0.3s ease;
+            color: var(--card-color1);
+        }
+        
+        .instrument-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.6s ease, padding 0.4s ease;
+        }
+        
+        .instrument-card.active .instrument-content {
+            max-height: 2000px;
+            padding: 0 25px 25px;
+        }
+        
+        .instrument-card.active .instrument-toggle {
+            transform: rotate(45deg);
+        }
+        
+        .instrument-image-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+        
+        .instrument-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .instrument-card:hover .instrument-image {
+            transform: scale(1.03);
+        }
+        
+        .instrument-desc {
+            line-height: 1.8;
+            color: #555;
+            font-size: 1.1rem;
+            padding: 0 10px;
+        }
+        
+        footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(135deg, var(--color1), var(--color3));
+            color: white;
+            margin-top: 50px;
+        }
+        
+        .footer-text {
+            margin: 0;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .instrument-name {
+                font-size: 1.5rem;
+            }
+            
+            .instrument-image {
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Music Notes -->
+    <div class="music-note" style="left: 5%; animation-delay: 0s;">♩</div>
+    <div class="music-note" style="left: 15%; animation-delay: 2s;">♪</div>
+    <div class="music-note" style="left: 85%; animation-delay: 4s;">♫</div>
+    <div class="music-note" style="left: 95%; animation-delay: 6s;">♬</div>
+    <div class="music-note" style="left: 50%; animation-delay: 1s;">♭</div>
+    <div class="music-note" style="left: 30%; animation-delay: 3s;">♪</div>
+    <div class="music-note" style="left: 70%; animation-delay: 5s;">♩</div>
+    
+    <header class="header">
+        <h1> ARUNACHAL PRADESH's</h1>
+        <p class="subtitle">Traditional Musical Instruments</p>
+    </header>
+    
+    <div class="container">
+        <!-- Ujuk Tapu -->
+        <div class="instrument-card" id="ujuk-tapu-card">
+            <div class="instrument-header" onclick="toggleInstrument('ujuk-tapu-card')">
+                <div class="instrument-icon">🎶</div>
+                <div class="instrument-name">Ujuk Tapu</div>
+                <div class="instrument-toggle">+</div>
+            </div>
+            <div class="instrument-content">
+                <div class="instrument-image-container">
+                    <img src="c:\Users\YASHASWINI\OneDrive\Desktop\project\images\Musical-Arunachal-Pradesh.jpg" alt="Ujuk Tapu" class="instrument-image" style="max-width: 300px; height: auto;"> >
+                </div>
+                <div class="instrument-desc">
+                    <p>The Ujuk Tapu is a traditional wind instrument from Arunachal Pradesh, crafted from bottle gourd. It is similar to the Been, the instrument used by snake charmers, and holds deep cultural significance.</p>
+                    <p><strong>🔑 Key Features:</strong></p>
+                    <p>🎵 <strong>Instrument Type:</strong> Wind (Gourd-based)</p>
+                    <p>🌳 <strong>Material:</strong> Made from bottle gourd with four perforated cane flutes</p>
+                    <p>🎼 <strong>Played With:</strong> Blown air through attached flutes</p>
+                    <p>📏 <strong>Shape:</strong> Hollow gourd with multiple reed pipes</p>
+                    <p>🔊 <strong>Sound:</strong> Soft, flowing, and expressive</p>
+                    <p>🕉️ <strong>Cultural Use:</strong> Played when a bride reaches her husband’s house, symbolizing transition</p>
+                    <p>🎭 <strong>Performance Style:</strong> Played solo or in ceremonial settings</p>
+                    <p><strong>🌟 Cultural Importance in Arunachal Pradesh:</strong><br> According to legend, the Ujuk Tapu was created by a father-in-law to comfort a bride who was distressed about leaving her maternal home. As the instrument was played, a monkey danced to its music, making the bride forget her sorrow.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <p class="footer-text"> NADA ANVESHA |Arunachal Pradesh Cultural Heritage </p>
+    </footer>
+    
+    <script>
+        // Toggle Instrument Details
+        function toggleInstrument(cardId) {
+            const card = document.getElementById(cardId);
+            card.classList.toggle('active');
+            
+            // Close other cards if this one is opening
+            if (card.classList.contains('active')) {
+                document.querySelectorAll('.instrument-card').forEach(item => {
+                    if (item.id !== cardId && item.classList.contains('active')) {
+                        item.classList.remove('active');
+                    }
+                });
+            }
+        }
+    </script>
+</body>
+</html>
+
+
+
+

@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sikkim's Musical Heritage</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Poppins:wght@400;600&display=swap');
+
+    :root {
+            --color1: #006266; /* Kerala Green */
+            --color2: #FFC312; /* Kerala Gold */
+            --color3: #1289A7; /* Kerala Blue */
+            --color4: #EE5A24; /* Kerala Orange */
+        }
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #eaf6ff 0%, #d9f1f1 100%);
+      color: #333;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    .music-note {
+      position: fixed;
+      font-size: 24px;
+      opacity: 0;
+      z-index: -1;
+      animation: floatNote 8s linear infinite;
+      color: #000000;
+    }
+
+    @keyframes floatNote {
+      0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+      20%, 80% { opacity: 0.7; }
+      100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+    }
+
+    .header {
+      background: linear-gradient(135deg, var(--color1), var(--color2));
+      color: white;
+      text-align: center;
+      padding: 50px 20px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      animation: pulse 15s infinite alternate;
+    }
+
+    @keyframes pulse {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 100% 50%; }
+    }
+
+    h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 3rem;
+      margin: 0;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    }
+
+    .subtitle {
+      font-size: 1.2rem;
+      opacity: 0.9;
+      margin-top: 10px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    .instrument-card {
+      background: white;
+      border-radius: 15px;
+      margin-bottom: 40px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position: relative;
+    }
+
+    .instrument-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+    }
+
+    .instrument-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(90deg, var(--card-color1), var(--card-color2));
+    }
+
+    .instrument-header {
+      padding: 25px;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .instrument-icon {
+      font-size: 2.5rem;
+      margin-right: 20px;
+      color: var(--card-color1);
+    }
+
+    .instrument-name {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.8rem;
+      flex-grow: 1;
+      color: var(--card-color1);
+    }
+
+    .instrument-toggle {
+      font-size: 1.8rem;
+      transition: transform 0.3s ease;
+      color: var(--card-color1);
+    }
+
+    .instrument-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.6s ease, padding 0.4s ease;
+    }
+
+    .instrument-card.active .instrument-content {
+      max-height: 2000px;
+      padding: 0 25px 25px;
+    }
+
+    .instrument-card.active .instrument-toggle {
+      transform: rotate(45deg);
+    }
+
+    .instrument-image-container {
+      overflow: hidden;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    }
+
+    .instrument-image {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .instrument-card:hover .instrument-image {
+      transform: scale(1.03);
+    }
+
+    .instrument-desc {
+      line-height: 1.8;
+      color: #555;
+      font-size: 1.1rem;
+      padding: 0 10px;
+    }
+
+    .equalizer {
+      display: flex;
+      align-items: flex-end;
+      height: 30px;
+      margin-left: 15px;
+    }
+
+    .equalizer-bar {
+      width: 4px;
+      margin-right: 3px;
+      background: currentColor;
+      animation: equalize 1.5s infinite ease-in-out;
+    }
+
+    @keyframes equalize {
+      0%, 100% { transform: scaleY(0.3); }
+      50% { transform: scaleY(1); }
+    }
+
+    #surna-card {
+      --card-color1: var(--color1);
+      --card-color2: var(--color2);
+    }
+
+    #kartal-card {
+      --card-color1: var(--color3);
+      --card-color2: var(--color4);
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      background: linear-gradient(135deg, var(--color1), var(--color3));
+      color: white;
+      margin-top: 50px;
+    }
+
+    .footer-text {
+      margin: 0;
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
+
+    @media (max-width: 768px) {
+      h1 { font-size: 2.2rem; }
+      .instrument-name { font-size: 1.5rem; }
+      .instrument-image { height: 200px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Floating Notes -->
+  <div class="music-note" style="left: 5%; animation-delay: 0s;">♩</div>
+  <div class="music-note" style="left: 15%; animation-delay: 2s;">♪</div>
+  <div class="music-note" style="left: 85%; animation-delay: 4s;">♫</div>
+  <div class="music-note" style="left: 95%; animation-delay: 6s;">♬</div>
+  <div class="music-note" style="left: 50%; animation-delay: 1s;">♭</div>
+  <div class="music-note" style="left: 30%; animation-delay: 3s;">♪</div>
+  <div class="music-note" style="left: 70%; animation-delay: 5s;">♩</div>
+
+  <header class="header">
+    <h1>Sikkim's</h1>
+    <p class="subtitle">Traditional Musical Instruments</p>
+    <div class="equalizer" style="justify-content: center; margin-top: 20px;">
+      <div class="equalizer-bar" style="animation-delay: -0.9s;"></div>
+      <div class="equalizer-bar" style="animation-delay: -0.6s;"></div>
+      <div class="equalizer-bar" style="animation-delay: -0.3s;"></div>
+      <div class="equalizer-bar" style="animation-delay: -0.1s;"></div>
+      <div class="equalizer-bar" style="animation-delay: -0.7s;"></div>
+    </div>
+  </header>
+
+  <div class="container">
+    <!-- Surna -->
+    <div class="instrument-card" id="surna-card">
+      <div class="instrument-header" onclick="toggleInstrument('surna-card')">
+        <div class="instrument-icon">🎺</div>
+        <div class="instrument-name">Surna</div>
+        <div class="instrument-toggle">+</div>
+      </div>
+      <div class="instrument-content">
+        <div class="instrument-image-container">
+            <img src="c:\Users\YASHASWINI\OneDrive\Desktop\project\images\sikkim1.jpg" alt="Surna" class="instrument-image" style="max-width: 200px; height: auto;"> 
+            </div>
+        <div class="instrument-desc">
+          <p>The <strong>Surna</strong> is a traditional wind instrument from Sikkim, often played in folk music, religious ceremonies, and cultural festivals. It is similar to the Shehnai, producing melodic and expressive tones.</p>
+          <p><strong>Key Features:</strong></p>
+          <p>• 🎵 Instrument Type: Wind (Double-reed)</p>
+          <p>• 🌳 Material: Made of wood or metal</p>
+          <p>• 🎼 Played With: Blown air through a reed mouthpiece</p>
+          <p>• 📏 Shape: Cylindrical body with finger holes</p>
+          <p>• 🔊 Sound: Deep, resonant, and auspicious</p>
+          <p><strong>Cultural Importance:</strong><br>
+          The Surna is deeply tied to Sikkim’s folk and religious traditions, often played during Buddhist ceremonies and local festivals. Its rich, flowing melodies create a spiritual and celebratory atmosphere.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Kartal -->
+    <div class="instrument-card" id="kartal-card">
+      <div class="instrument-header" onclick="toggleInstrument('kartal-card')">
+        <div class="instrument-icon">🔔</div>
+        <div class="instrument-name">Kartal</div>
+        <div class="instrument-toggle">+</div>
+      </div>
+      <div class="instrument-content">
+        <div class="instrument-image-container">
+            <img src="c:\Users\YASHASWINI\OneDrive\Desktop\project\images\sikkim2.jpg" alt="Kartal" class="instrument-image" style="max-width: 200px; height: auto;">  
+        </div>
+        <div class="instrument-desc">
+          <p>The <strong>Kartal</strong> is a traditional handheld percussion instrument commonly used in folk music, devotional singing, and dance performances.</p>
+          <p><strong>Key Features:</strong></p>
+          <p>• 🎵 Instrument Type: Percussion (Handheld Cymbals)</p>
+          <p>• 🌳 Material: Made of wood or brass</p>
+          <p>• 🎼 Played With: Struck together using hands</p>
+          <p>• 📏 Shape: Two rectangular or circular pieces with metal jingles</p>
+          <p>• 🔊 Sound: Sharp, rhythmic, and energetic</p>
+          <p><strong>Cultural Importance:</strong><br>
+          The Kartal is deeply tied to Sikkim’s folk and devotional traditions, often played in temples, festivals, and storytelling performances. It adds energy and rhythm to musical compositions, making it a staple in religious gatherings.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p class="footer-text">NADA ANVESHA |Sikkim's Cultural Heritage </p>
+    <div class="equalizer" style="justify-content: center; margin-top: 15px;">
+      <div class="equalizer-bar" style="animation-delay: -0.8s;"></div>
+      <div class="equalizer-bar" style="animation-delay: -0.5s;"></div>
+      <div class="equalizer-bar" style="animation-delay: -0.2s;"></div>
+      <div class="equalizer-bar" style="animation-delay: -0.7s;"></div>
+      <div class="equalizer-bar" style="animation-delay: -0.4s;"></div>
+    </div>
+  </footer>
+
+  <script>
+    function toggleInstrument(cardId) {
+      const card = document.getElementById(cardId);
+      card.classList.toggle('active');
+
+      if (card.classList.contains('active')) {
+        document.querySelectorAll('.instrument-card').forEach(item => {
+          if (item.id !== cardId && item.classList.contains('active')) {
+            item.classList.remove('active');
+          }
+        });
+      }
+    }
+  </script>
+</body>
+</html>

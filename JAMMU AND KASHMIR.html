@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JAMMU & KASHMIR's Musical Heritage</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Poppins:wght@400;600&display=swap');
+        
+        :root {
+            --color1: #006266; /* Same as previous */
+            --color2: #FFC312; /* Same as previous */
+            --color3: #1289A7; /* Same as previous */
+            --color4: #EE5A24; /* Same as previous */
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #f0f8ff 0%, #e6f0fa 100%);
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .music-note {
+            position: fixed;
+            font-size: 24px;
+            opacity: 0;
+            z-index: -1;
+            animation: floatNote 8s linear infinite;
+            color: #000000;
+        }
+        
+        @keyframes floatNote {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            20% {
+                opacity: 0.7;
+            }
+            80% {
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        .header {
+            background: linear-gradient(135deg, var(--color1), var(--color2));
+            color: white;
+            text-align: center;
+            padding: 50px 20px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            animation: pulse 15s infinite alternate;
+        }
+        
+        @keyframes pulse {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+        
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3rem;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            position: relative;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-top: 10px;
+            position: relative;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        
+        .instrument-card {
+            background: white;
+            border-radius: 15px;
+            margin-bottom: 40px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+        }
+        
+        .instrument-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+        }
+        
+        .instrument-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--card-color1), var(--card-color2));
+        }
+        
+        .instrument-header {
+            padding: 25px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .instrument-icon {
+            font-size: 2.5rem;
+            margin-right: 20px;
+            transition: transform 0.3s ease;
+            color: var(--card-color1);
+        }
+        
+        .instrument-name {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+            flex-grow: 1;
+            color: var(--card-color1);
+        }
+        
+        .instrument-toggle {
+            font-size: 1.8rem;
+            transition: transform 0.3s ease;
+            color: var(--card-color1);
+        }
+        
+        .instrument-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.6s ease, padding 0.4s ease;
+        }
+        
+        .instrument-card.active .instrument-content {
+            max-height: 2000px;
+            padding: 0 25px 25px;
+        }
+        
+        .instrument-card.active .instrument-toggle {
+            transform: rotate(45deg);
+        }
+        
+        .instrument-image-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+        
+        .instrument-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .instrument-card:hover .instrument-image {
+            transform: scale(1.03);
+        }
+        
+        .instrument-desc {
+            line-height: 1.8;
+            color: #555;
+            font-size: 1.1rem;
+            padding: 0 10px;
+        }
+        
+        .equalizer {
+            display: flex;
+            align-items: flex-end;
+            height: 30px;
+            margin-left: 15px;
+        }
+        
+        .equalizer-bar {
+            width: 4px;
+            margin-right: 3px;
+            background: currentColor;
+            animation: equalize 1.5s infinite ease-in-out;
+        }
+        
+        @keyframes equalize {
+            0%, 100% { transform: scaleY(0.3); }
+            50% { transform: scaleY(1); }
+        }
+        
+        #santoor-card {
+            --card-color1: var(--color1);
+            --card-color2: var(--color2);
+        }
+        
+        #tumbaknari-card {
+            --card-color1: var(--color3);
+            --card-color2: var(--color4);
+        }
+        
+        #sazekashmir-card {
+            --card-color1: #833471;
+            --card-color2: #5758BB;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px;
+            background: linear-gradient(135deg, var(--color1), var(--color3));
+            color: white;
+            margin-top: 50px;
+        }
+        
+        .footer-text {
+            margin: 0;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .instrument-name {
+                font-size: 1.5rem;
+            }
+            
+            .instrument-image {
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="music-note" style="left: 5%; animation-delay: 0s;">♩</div>
+    <div class="music-note" style="left: 15%; animation-delay: 2s;">♪</div>
+    <div class="music-note" style="left: 85%; animation-delay: 4s;">♫</div>
+    <div class="music-note" style="left: 95%; animation-delay: 6s;">♬</div>
+    <div class="music-note" style="left: 50%; animation-delay: 1s;">♭</div>
+    <div class="music-note" style="left: 30%; animation-delay: 3s;">♪</div>
+    <div class="music-note" style="left: 70%; animation-delay: 5s;">♩</div>
+    
+    <header class="header">
+        <h1>JAMMU & KASHMIR's</h1>
+        <p class="subtitle">Traditional Musical Instruments</p>
+        <div class="equalizer" style="justify-content: center; margin-top: 20px;">
+            <div class="equalizer-bar" style="animation-delay: -0.9s;"></div>
+            <div class="equalizer-bar" style="animation-delay: -0.6s;"></div>
+            <div class="equalizer-bar" style="animation-delay: -0.3s;"></div>
+            <div class="equalizer-bar" style="animation-delay: -0.1s;"></div>
+            <div class="equalizer-bar" style="animation-delay: -0.7s;"></div>
+        </div>
+    </header>
+    
+    <div class="container">
+        <!-- Santoor -->
+        <div class="instrument-card" id="santoor-card">
+            <div class="instrument-header" onclick="toggleInstrument('santoor-card')">
+                <div class="instrument-icon">🎼</div>
+                <div class="instrument-name">Santoor</div>
+                <div class="instrument-toggle">+</div>
+            </div>
+            <div class="instrument-content">
+                <div class="instrument-image-container">
+                    <img src="c:\Users\YASHASWINI\OneDrive\Desktop\project\images\jk.jpg" alt="Santoor" class="instrument-image" style="max-width: 300px; height: auto;">
+                    <img src="c:\Users\YASHASWINI\OneDrive\Desktop\project\images\jk.1.jpg" alt="Santoor" class="instrument-image" style="max-width: 300px; height: auto;">
+                </div>
+                <div class="instrument-desc">
+                    <p>The <strong>Santoor</strong> is a traditional hammered dulcimer from Jammu and Kashmir, known for its rich, resonant tones. It features a trapezoidal wooden body with <em>100 strings</em>, played using lightweight mallets called <em>mezrabs</em>.</p>
+
+                    <p><strong>🔑 Key Features:</strong></p>
+                    <p>🎵 <strong>Instrument Type:</strong> String (Hammered)</p>
+                    <p>🌳 <strong>Material:</strong> Wooden body with metal strings</p>
+                    <p>🎼 <strong>Played With:</strong> Small mallets (mezrabs)</p>
+                    <p>📏 <strong>Shape:</strong> Trapezoidal with bridges for tuning</p>
+                    <p>🔊 <strong>Sound:</strong> Melodic, resonant, and soothing</p>
+                    <p>🕉️ <strong>Cultural Use:</strong> Sufiana music, classical and folk performances</p>
+                    <p>🎭 <strong>Performance Style:</strong> Played in ensemble or solo compositions, often accompanying vocal music</p>
+
+                    <p><strong>🌟 Cultural Importance in Kashmir:</strong><br>The Santoor holds a special place in Kashmiri music, celebrated for its ethereal sound that enhances devotional and folk traditions.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Tumbaknari -->
+        <div class="instrument-card" id="tumbaknari-card">
+            <div class="instrument-header" onclick="toggleInstrument('tumbaknari-card')">
+                <div class="instrument-icon">🥁</div>
+                <div class="instrument-name">Tumbaknari</div>
+                <div class="instrument-toggle">+</div>
+            </div>
+            <div class="instrument-content">
+                <div class="instrument-image-container">
+                    <img src="c:\Users\YASHASWINI\OneDrive\Desktop\project\images\jk1.2.jpg" alt="Tumbaknari" class="instrument-image" style="max-width: 300px; height: auto;">
+                    <img src="c:\Users\YASHASWINI\OneDrive\Desktop\project\images\jk1.jpg" alt="Tumbaknari" class="instrument-image" style="max-width: 300px; height: auto;">
+                </div>
+                <div class="instrument-desc">
+                    <p>The <strong>Tumbaknari</strong> is a traditional Kashmiri clay drum, played during weddings and festive gatherings. Its simple design and rhythmic beats make it a vital part of folk celebrations.</p>
+
+                    <p><strong>🔑 Key Features:</strong></p>
+                    <p>🎵 <strong>Instrument Type:</strong> Percussion (Drum)</p>
+                    <p>🌳 <strong>Material:</strong> Earthen clay body with stretched skin</p>
+                    <p>🎼 <strong>Played With:</strong> Hands, striking the drumhead</p>
+                    <p>📏 <strong>Shape:</strong> Rounded pot-like structure</p>
+                    <p>🔊 <strong>Sound:</strong> Deep, rhythmic, and celebratory</p>
+                    <p>🕉️ <strong>Cultural Use:</strong> Weddings, folk performances, traditional gatherings</p>
+                    <p>🎭 <strong>Performance Style:</strong> Often played in group settings, with singers and dancers</p>
+
+                    <p><strong>🌟 Cultural Importance in Kashmir:</strong><br>The Tumbaknari is an essential part of Kashmiri celebrations, especially in wedding songs and festive dances.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Saz-e-Kashmir -->
+        <div class="instrument-card" id="sazekashmir-card">
+            <div class="instrument-header" onclick="toggleInstrument('sazekashmir-card')">
+                <div class="instrument-icon">🎻</div>
+                <div class="instrument-name">Saz-e-Kashmir</div>
+                <div class="instrument-toggle">+</div>
+            </div>
+            <div class="instrument-content">
+                <div class="instrument-image-container">
+                    <img src="c:\Users\YASHASWINI\OneDrive\Desktop\project\images\jk2.jpg" alt="Saz-e-Kashmir" class="instrument-image" style="max-width: 300px; height: auto;">
+                   </div>
+                <div class="instrument-desc">
+                    <p>The <strong>Saz-e-Kashmir</strong> is a bowed string instrument, often used in Sufiana Kalam music. It has a wooden resonator and multiple strings, played with a bow to produce deep, expressive tones.</p>
+
+                    <p><strong>🔑 Key Features:</strong></p>
+                    <p>🎵 <strong>Instrument Type:</strong> String (Bowed)</p>
+                    <p>🌳 <strong>Material:</strong> Wooden body with gut or metal strings</p>
+                    <p>🎼 <strong>Played With:</strong> A bow, drawn across strings</p>
+                    <p>📏 <strong>Shape:</strong> Oval or rounded resonator with a long neck</p>
+                    <p>🔊 <strong>Sound:</strong> Deep, emotional, and expressive</p>
+                    <p>🕉️ <strong>Cultural Use:</strong> Sufiana music, devotional and folk performances</p>
+                    <p>🎭 <strong>Performance Style:</strong> Played solo or in ensembles, often accompanying singing</p>
+
+                    <p><strong>🌟 Cultural Importance in Kashmir:</strong><br>The Saz-e-Kashmir is deeply tied to the Sufi music traditions of Kashmir, evoking spiritual and emotional depth in performances.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <p class="footer-text">NADA ANVESHA |Jammu & Kashmir Cultural Heritage</p>
+        <div class="equalizer" style="justify-content: center; margin-top: 15px;">
+            <div class="equalizer-bar" style="animation-delay: -0.8s;"></div>
+            <div class="equalizer-bar" style="animation-delay: -0.5s;"></div>
+            <div class="equalizer-bar" style="animation-delay: -0.2s;"></div>
+            <div class="equalizer-bar" style="animation-delay: -0.7s;"></div>
+            <div class="equalizer-bar" style="animation-delay: -0.4s;"></div>
+        </div>
+    </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const notes = ['♪', '♫', '♩', '♬', '♭'];
+            const body = document.body;
+            
+            for (let i = 0; i < 8; i++) {
+                const note = document.createElement('div');
+                note.className = 'music-note';
+                note.textContent = notes[Math.floor(Math.random() * notes.length)];
+                note.style.left = Math.random() * 100 + '%';
+                note.style.animationDelay = Math.random() * 8 + 's';
+                note.style.animationDuration = 5 + Math.random() * 10 + 's';
+                body.appendChild(note);
+            }
+        });
+        
+        function toggleInstrument(cardId) {
+            const card = document.getElementById(cardId);
+            card.classList.toggle('active');
+            
+            if (card.classList.contains('active')) {
+                document.querySelectorAll('.instrument-card').forEach(item => {
+                    if (item.id !== cardId && item.classList.contains('active')) {
+                        item.classList.remove('active');
+                    }
+                });
+            }
+        }
+    </script>
+</body>
+</html>
